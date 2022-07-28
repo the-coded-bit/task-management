@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveUser } from '../src/utils/features/userSlice';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
+import MainPageLayout from '../src/layouts/MainPageLayout';
 
 export default function Home() {
   //  useDispatch hook
@@ -28,7 +29,7 @@ export default function Home() {
     <main>
       <PageLayout style={'bg-[#ffffff] w-screen h-screen'}>
         {
-          userUid == null ? <LoginLayout /> : <div>main page</div>
+          userUid == null ? <LoginLayout /> : <MainPageLayout />
         }
       </PageLayout>
     </main>
