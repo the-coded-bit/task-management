@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signinOptions, signinFields } from "../../constants";
-import { addUser, setRememberMe } from "../../utils/features/userSlice";
+import { addUser, setRememberMe, setActiveUser, logInUser } from "../../utils/features/userSlice";
 import { validateEmail, validatePassword } from "../../utils/validate";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -63,8 +63,12 @@ export const useLogin = () => {
     const handleSignIn = () => {
         // call add user thunk to add user into database
         dispatch(addUser(fullName, email, password));
-        // register remember me state in store
-        dispatch(setRememberMe(rememberMe));
+    }
+
+    // handle login click
+    const handleLogIn = () =>{
+        // call sign in user function
+        dispatch(logInUser(email, password));
     }
 
     // toggle password type
@@ -79,6 +83,7 @@ export const useLogin = () => {
     // toggle remember me
     const toggleCheckbox = () => {
         console.log(!rememberMe);
+        dispatch(setRememberMe(!rememberMe));
         setRememberme(!rememberMe);
     }
 
@@ -91,6 +96,7 @@ export const useLogin = () => {
         handleChanges,
         handleSignIn,
         toggleCheckbox,
+        handleLogIn,
         email,
         password,
         fullName,

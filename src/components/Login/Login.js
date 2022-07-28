@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { eye, eyefill } from '../../../public/icons';
 import { optionsList, signinFields, signinOptions } from '../../constants'
 import { useLogin } from './useLogin'
 import Image from 'next/image'
-
 
 function Login() {
     // useLogin is custom hook to abstract the logic from ui component Login.
@@ -15,6 +14,7 @@ function Login() {
         handleChanges,
         handleSignIn,
         toggleCheckbox,
+        handleLogIn,
         email, password, fullName, warning
     } = useLogin();
     // apply styles when user selects any auth option
@@ -77,7 +77,7 @@ function Login() {
                             {/* warning if applicable */}
                             {warning.show == true && <span>{warning.error}</span>}
                             {/* Login button */}
-                            <button className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm' disabled={warning.show || email == '' || password == ''} >Log In</button>
+                            <button className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm' disabled={warning.show || email == '' || password == ''}  onClick={() => handleLogIn()}>Log In</button>
                             {/* remember me checkbox */}
                             <label className='flex items-baseline justify-start gap-2' onChange={(e) => toggleCheckbox(e)}>
                                 <input type='checkbox' className=' accent-buttoncolor' />
