@@ -1,8 +1,9 @@
 import React from 'react'
 import { defaultProfile } from '../../../public/icons';
-import { nav_options } from '../../constants';
+import { nav_options, taskLists } from '../../constants';
 import { useTask } from './useTask'
 import Image from 'next/image';
+import List from '../List/List';
 
 function Task() {
     const { activeOption, userName } = useTask();
@@ -18,6 +19,7 @@ function Task() {
                         </header>
                         <h1 className='font-poppins font-medium tracking-wider text-primary text-lg h-[10%]'>Projects</h1>
                         <section className='flex gap-10 h-[80%]'>
+                            {/* to do list */}
                             <article className='bg-[#f5f9f9] w-[30%] rounded-2xl'>
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
@@ -25,8 +27,10 @@ function Task() {
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
+                                    <List listType={taskLists.TODO} />
                                 </div>
                             </article>
+                            {/* in progress list */}
                             <article className='bg-[#f5f9f9] w-[30%] rounded-2xl'>
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
@@ -34,8 +38,10 @@ function Task() {
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
+                                    <List listType={taskLists.INPROGRESS}/>
                                 </div>
                             </article>
+                            {/* completed list */}
                             <article className='bg-[#f5f9f9] w-[30%] rounded-2xl'>
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
@@ -43,6 +49,7 @@ function Task() {
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
+                                    <List listType={taskLists.COMPLETED}/>
                                 </div>
                             </article>
                         </section>

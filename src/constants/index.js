@@ -32,3 +32,10 @@ export const nav_options = Object.freeze({
     CHAT: 'Chat',
     CALENDAR: 'Calendar'
 });
+
+// types of task lists
+export const taskLists = Object.freeze({
+    TODO : 'todo',
+    INPROGRESS: 'inprogress',
+    COMPLETED: 'completed'
+});
