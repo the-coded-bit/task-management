@@ -23,3 +23,12 @@ export const STATUSES = Object.freeze({
     SUCCESS: 'success',
     IDLE: 'idle'
 });
+
+// navbar options
+export const nav_options = Object.freeze({
+    OVERVIEW: 'Overview',
+    STATS: 'Stats',
+    PROJECTS: 'Projects',
+    CHAT: 'Chat',
+    CALENDAR: 'Calendar'
+});

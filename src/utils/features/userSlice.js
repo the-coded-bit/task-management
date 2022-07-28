@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { browserSessionPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { browserSessionPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { STATUSES } from '../../constants';
 import { auth } from '../firebase';
 
@@ -63,6 +63,21 @@ export function logInUser(email, password) {
             dispatch(setActiveUser(user));
             dispatch(setStatus(STATUSES.SUCCESS));
         } catch (err) {
+            console.log(err);
+            dispatch(setStatus(STATUSES.ERROR));
+        }
+    }
+}
+
+// logout thunk
+export function logout(){
+    return async function logoutThunk(dispatch){
+        try{
+            dispatch(setStatus(STATUSES.LOADING));
+            await signOut(auth);
+            dispatch(setActiveUser({displayName: null, email: null, uid: null}));
+            dispatch(setStatus(STATUSES.IDLE));
+        } catch(err){
             console.log(err);
             dispatch(setStatus(STATUSES.ERROR));
         }
