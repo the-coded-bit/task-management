@@ -10,7 +10,7 @@ function List({ listType }) {
         <Droppable droppableId={listType.toString()}>
             {
                 (provided) => (
-                    <div className='h-full w-full flex flex-col gap-4' ref={provided.innerRef} {...provided.droppableProps}>
+                    <div className='h-full w-full flex flex-col gap-4 overflow-y-scroll' ref={provided.innerRef} {...provided.droppableProps}>
                         {listType == taskLists.TODO && (
                             todoTaskList.map((item, index) => <Card data={item} index={index}/>)
                         )}

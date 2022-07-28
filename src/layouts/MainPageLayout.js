@@ -26,10 +26,10 @@ function MainPageLayout() {
     return (
         <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
             <div className='flex w-full h-full'>
-                <aside className='bg-red-100 w-[20%]'>
+                <aside className='w-[20%]'>
                     <Navbar />
                 </aside>
-                <section className='bg-green-100 w-[80%]'>
+                <section className='w-[80%]'>
                     <Task />
                 </section>
             </div>

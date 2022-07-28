@@ -6,14 +6,15 @@ import Image from 'next/image';
 import List from '../List/List';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTasks } from '../../utils/features/taskSlice';
+import Edit from '../Edit/Edit';
 
 
 
 function Task() {
-    
+
     // access task related data from task store
-    const {todoCount, inProgressCount, completedCount} = useSelector((state) => state.tasks);
-    const { activeOption, userName } = useTask();
+    const { todoCount, inProgressCount, completedCount } = useSelector((state) => state.tasks);
+    const { activeOption, userName, handlePlusOptionClick, activeEditOption, setActiveEditOption } = useTask();
     return (
         <div className='h-full w-full px-16 pt-12'>
             {
@@ -33,7 +34,11 @@ function Task() {
                                         <span className='font-poppins font-medium text-sm'>To do</span>
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{todoCount}</span>
                                     </div>
-                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
+                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]' onClick={() => handlePlusOptionClick(taskLists.TODO)}>+</button>
+                                    {
+                                        activeEditOption.current == taskLists.TODO &&
+                                        <Edit listType={taskLists.TODO} setActiveEditOption={setActiveEditOption}/>
+                                    }
                                     <List listType={taskLists.TODO} />
                                 </div>
                             </article>
@@ -44,8 +49,12 @@ function Task() {
                                         <span className='font-poppins font-medium text-sm'>In Progress</span>
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{inProgressCount}</span>
                                     </div>
-                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
-                                    <List listType={taskLists.INPROGRESS}/>
+                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]' onClick={() => handlePlusOptionClick(taskLists.INPROGRESS)}>+</button>
+                                    {
+                                        activeEditOption.current == taskLists.INPROGRESS &&
+                                        <Edit listType={taskLists.INPROGRESS} setActiveEditOption={setActiveEditOption}/>
+                                    }
+                                    <List listType={taskLists.INPROGRESS} />
                                 </div>
                             </article>
                             {/* completed list */}
@@ -55,8 +64,12 @@ function Task() {
                                         <span className='font-poppins font-medium text-sm'>Completed</span>
                                         <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{completedCount}</span>
                                     </div>
-                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
-                                    <List listType={taskLists.COMPLETED}/>
+                                    <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]' onClick={() => handlePlusOptionClick(taskLists.COMPLETED)}>+</button>
+                                    {
+                                        activeEditOption.current == taskLists.COMPLETED &&
+                                        <Edit listType={taskLists.COMPLETED} setActiveEditOption={setActiveEditOption}/>
+                                    }
+                                    <List listType={taskLists.COMPLETED} />
                                 </div>
                             </article>
                         </section>

@@ -20,6 +20,20 @@ const taskSlice = createSlice({
         setTodoList: (state, action) => {state.todoTaskList = action.payload},
         setInProgressList: (state, action) => {state.inProgressTaskList = action.payload},
         setCompletedList: (state, action) => {state.completedTaskList = action.payload},
+        addTask: (state, action) =>{
+            const {option, data} = action.payload;
+            switch(option){
+                case taskLists.TODO:
+                    state.todoTaskList.push(data);
+                    break;
+                case taskLists.INPROGRESS:
+                    state.inProgressTaskList.push(data);
+                    break;
+                case taskLists.COMPLETED:
+                    state.completedTaskList.push(data);
+                    break;        
+            }
+        },
         setData: (state, action) => {
             const { tododata, todocount, inprogressdata, inprogresscount, completeTaskdata, completeTaskcount } = action.payload;
             state.todoCount = todocount;
@@ -197,6 +211,26 @@ export function setTasksAsync(){
     }
 }
 
-export const { setData, increment, decrement, setTodoList, setCompletedList, setInProgressList} = taskSlice.actions
+// add new task
+export function addTaskAsync(option, data){
+    return async function addTaskThunk(dispatch){
+        dispatch(increment(option));
+        dispatch(addTask({option: option, data: data}));
+
+        switch(option){
+            case taskLists.TODO:
+                await setDoc(doc(db, 'todoTasks', data.id), data);
+                break;
+            case taskLists.INPROGRESS:
+                await setDoc(doc(db, 'inProgressTasks', data.id), data);
+                break;
+            case taskLists.COMPLETED:
+                await setDoc(doc(db, 'completedTasks', data.id), data);
+                break;        
+        }
+    }
+}
+
+export const { setData, increment, decrement, setTodoList, setCompletedList, setInProgressList, addTask} = taskSlice.actions
 
 export default taskSlice.reducer
