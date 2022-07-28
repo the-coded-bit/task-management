@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { defaultProfile } from '../../../public/icons';
 import { nav_options, taskLists } from '../../constants';
 import { useTask } from './useTask'
 import Image from 'next/image';
 import List from '../List/List';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTasks } from '../../utils/features/taskSlice';
+
+
 
 function Task() {
+    
+    // access task related data from task store
+    const {todoCount, inProgressCount, completedCount} = useSelector((state) => state.tasks);
     const { activeOption, userName } = useTask();
     return (
         <div className='h-full w-full px-16 pt-12'>
@@ -24,7 +31,7 @@ function Task() {
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
                                         <span className='font-poppins font-medium text-sm'>To do</span>
-                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
+                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{todoCount}</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
                                     <List listType={taskLists.TODO} />
@@ -35,7 +42,7 @@ function Task() {
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
                                         <span className='font-poppins font-medium text-sm'>In Progress</span>
-                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
+                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{inProgressCount}</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
                                     <List listType={taskLists.INPROGRESS}/>
@@ -46,7 +53,7 @@ function Task() {
                                 <div className='pt-5 px-5 w-full h-full flex flex-col gap-4'>
                                     <div className='flex justify-between items-center'>
                                         <span className='font-poppins font-medium text-sm'>Completed</span>
-                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>2</span>
+                                        <span className=' w-6 h-6 rounded-lg bg-[#ecf3f3] text-center text-[#329c89] text-sm font-medium'>{completedCount}</span>
                                     </div>
                                     <button className='w-full h-9 rounded-lg bg-[#ecf3f3] text-[#329c89]'>+</button>
                                     <List listType={taskLists.COMPLETED}/>
