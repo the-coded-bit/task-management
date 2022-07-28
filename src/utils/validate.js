@@ -10,6 +10,6 @@ export const validateEmail = (email) =>{
 export const validatePassword = (password) =>{
     // if password is empty return true
     if(password === '') return true;
-    var re = new RegExp('^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+    var re = new RegExp('^.{8,32}$');
     return re.test(password);
 }

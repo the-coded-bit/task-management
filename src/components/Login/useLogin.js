@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { signinOptions, signinFields } from "../../constants";
+import { addUser, setRememberMe } from "../../utils/features/userSlice";
 import { validateEmail, validatePassword } from "../../utils/validate";
+import { useDispatch, useSelector } from "react-redux";
 
 
 export const useLogin = () => {
+    // dispatch function using useDispatch hook
+    const dispatch = useDispatch();
     // state to maintain current selected auth option i.e. LogIn or Signup
     const [activeAuthOption, setactiveAuthOption] = useState(signinOptions.LOGIN);
     // state to maintain the password type initially it will be password
@@ -16,6 +20,8 @@ export const useLogin = () => {
     const [password, setPassword] = useState('');
     // state to maintain whether or not to show warnings 
     const [warning, setWarning] = useState({ show: false, error: '' });
+    // state to maintain remember me state
+    const [rememberMe, setRememberme] = useState(false);
 
     // handle when the use clicks on any auth option.
     const handleChangeAuthOption = (option) => {
@@ -53,6 +59,14 @@ export const useLogin = () => {
         }
     }
 
+    // handle signin click
+    const handleSignIn = () => {
+        // call add user thunk to add user into database
+        dispatch(addUser(fullName, email, password));
+        // register remember me state in store
+        dispatch(setRememberMe(rememberMe));
+    }
+
     // toggle password type
     const togglePassword = () => {
         if (passwordType === "password") {
@@ -62,6 +76,12 @@ export const useLogin = () => {
         setPasswordType("password")
     }
 
+    // toggle remember me
+    const toggleCheckbox = () => {
+        console.log(!rememberMe);
+        setRememberme(!rememberMe);
+    }
+
     return {
         activeAuthOption,
         setactiveAuthOption,
@@ -69,6 +89,8 @@ export const useLogin = () => {
         passwordType,
         togglePassword,
         handleChanges,
+        handleSignIn,
+        toggleCheckbox,
         email,
         password,
         fullName,

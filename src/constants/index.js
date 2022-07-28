@@ -14,3 +14,12 @@ export const signinFields = Object.freeze({
     EMAIL: 'email',
     PASSWORD: 'password'
 })
+
+// statuses
+// for use while making requests to backend
+export const STATUSES = Object.freeze({
+    ERROR: 'error',
+    LOADING: 'loading',
+    SUCCESS: 'success',
+    IDLE: 'idle'
+});

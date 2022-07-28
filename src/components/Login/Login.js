@@ -13,6 +13,8 @@ function Login() {
         passwordType,
         togglePassword,
         handleChanges,
+        handleSignIn,
+        toggleCheckbox,
         email, password, fullName, warning
     } = useLogin();
     // apply styles when user selects any auth option
@@ -75,9 +77,9 @@ function Login() {
                             {/* warning if applicable */}
                             {warning.show == true && <span>{warning.error}</span>}
                             {/* Login button */}
-                            <button className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm'>Log In</button>
+                            <button className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm' disabled={warning.show || email == '' || password == ''} >Log In</button>
                             {/* remember me checkbox */}
-                            <label className='flex items-baseline justify-start gap-2'>
+                            <label className='flex items-baseline justify-start gap-2' onChange={(e) => toggleCheckbox(e)}>
                                 <input type='checkbox' className=' accent-buttoncolor' />
                                 <span className='font-poppins font-thin text-sm text-primary'>Remember me</span>
                             </label>
@@ -89,7 +91,7 @@ function Login() {
                                 type='text'
                                 placeholder='Full Name'
                                 spellCheck={false}
-                                onChange = {(e) => handleChanges(e, signinFields.FULLNAME)}
+                                onChange={(e) => handleChanges(e, signinFields.FULLNAME)}
                                 className='border-[1px] border-solid border-border rounded-lg outline-none p-[8px] placeholder:font-poppins placeholder:text-sm placeholder:font-light'
                             />
                             {/* email input box */}
@@ -117,9 +119,13 @@ function Login() {
                             {/* warning if applicable */}
                             {warning.show == true && <span>{warning.error}</span>}
                             {/* Login button */}
-                            <button className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm'>{signinOptions.SIGNUP}</button>
+                            <button
+                                className='w-full h-11 bg-buttoncolor rounded-lg font-poppins font-bold text-[#ffffff] text-sm'
+                                onClick={() => handleSignIn()}
+                                disabled={warning.show || (fullName == '' || email == '' || password == '')}>{signinOptions.SIGNUP}
+                            </button>
                             {/* remember me checkbox */}
-                            <label className='flex items-baseline justify-start gap-2'>
+                            <label className='flex items-baseline justify-start gap-2' onChange={(e) => toggleCheckbox(e)}>
                                 <input type='checkbox' className=' accent-buttoncolor' />
                                 <span className='font-poppins font-thin text-sm text-primary'>Remember me</span>
                             </label>
