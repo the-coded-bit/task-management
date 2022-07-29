@@ -22,7 +22,7 @@ function Task() {
                     <div className='h-full w-full'>
                         <header className='flex  justify-end items-center gap-5 h-[10%]'>
                             {/* using split method to extract first name of user not full name */}
-                            <span className='font-poppins font-normal text-[#3a3a3a] tracking-wider'>Hi {userName.split(' ')[0]}</span>
+                            <span className='font-poppins font-normal text-[#3a3a3a] tracking-wider'>Hi {userName}</span>
                             <Image src={defaultProfile} layout='fixed' width={40} height={40} />
                         </header>
                         <h1 className='font-poppins font-medium tracking-wider text-primary text-lg h-[10%]'>Projects</h1>
