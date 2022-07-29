@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Management 
 
-## Getting Started
+Task management is usable web-app for managing teams remotely, enabling remote culture in teams.
 
-First, run the development server:
+## About
+This project is bootstrapped using NextJs and Firebase as Backend service.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Features
+- Login/Signup authentication using firebase auth
+- add tasks in any section i.e. add task in todo, in progress   or in completed tasks.
+- drag and drop tasks across different sections i.e. todo    tasks, in progress tasks, completed tasks.
+- implemented Remember Me functionality i.e maintain the user authentication state at session level or forever.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+-  NextJS
+-  Tailwind CSS
+-  Redux toolkit
+-  Firebase
+    - Firebase Authentication
+    - cloud firestore
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Installation Guide
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 1. Using NPM
+> ***Note***: preffered to use Node version 18.2.0
+`Asumming everyone knows how to setup firebase😅😄..`
 
-## Learn More
+- clone the repository to your host machine
+- In cloned directory open terminal use command **`npm i`**
+- Install tailwind if not installed (optional) **`npm install -D tailwindcss postcss autoprefixer`**
+- create ***`.env.local`*** file
+- setup firebase
+- add firebase config to `.env.local` file. ex
+    - NEXT_PUBLIC_FIREBASE_API_KEY="your api key"
+    - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your auth domain key" likewise add all fields..
+- enable **`firebase Authentication, cloud storage, firebase store`**  at **`console.firebase.com`**  
+- finally, use **`npm run dev`**
 
-To learn more about Next.js, take a look at the following resources:
+#### Deployed Link:
+[here](https://task-management-hazel.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### *Note:*
+> Edit tasks is not implemented until now.... will work on this afterwards.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+###### Any Contributions will be appreciated😋😋
